@@ -13,6 +13,7 @@ import {Medicine} from "./components/medicine/medicine"
 import {MedecineCategories} from "./components/medicine/medicineCategories"
 import Payment from "./components/payment/payment";
 import {HomePage} from "./pages/homepage/homepage/HomePage.jsx"
+import {NotDoctor} from "../src/components/MainPage/NotDoctor.jsx"
 function App() {
 	return (
 		<div className='App'>
@@ -25,6 +26,7 @@ function App() {
 				<Route path = "/consultpage" element = {<ConsultPage/>}></Route>
 				<Route path="/login" element={<Login/>}></Route>
        			 <Route path="/signup" element={<MainPage/>}></Route>
+					<Route path="/notsignup" element={<NotDoctor/>}></Route>
 					<Route path={"/medicines"} element={<Medicine/>}></Route>
        			 <Route path={"/medicines/:id"} element={<MedecineCategories/>}></Route>
 					<Route path="/payment" element={<Payment />} />

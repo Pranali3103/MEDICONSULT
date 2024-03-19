@@ -2,7 +2,7 @@ import "./MainPage.css";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
-
+import axios from "axios";
 const StyledLink = styled(Link)`
   color: black;
   text-decoration: none;
@@ -27,35 +27,40 @@ const StyledLinkRegister = styled(Link)`
   text-decoration: none;
 `;
 
-export const MainPage = () => {
-  const [form, setForm] = useState({});
 
-  const handleForm = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+export const NotDoctor = () => {
+ 
+const[form,setForm]=useState({});
 
-  const registerUser = async (e) => {
-    const response = await fetch('http://localhost:5000/signup', {
-      method: 'POST',
-      body: JSON.stringify(form),
-      headers: {
-        'Content-Type': 'application/json'
-      }
+const handleForm=(e)=>{
+  setForm({
+    ...form,
+    [e.target.name]: e.target.value,
+  })
+}
+//p r 
+//full name:p
+//full name :pr
+const linkstyle={
+  color:'blue',
+  fontSize:'10px',
   
-    });
-
-    const data = await response.text();
-    console.log(data);
-    alert("Request send successful")
   }
-  const linkstyle={
-    color:'#cca64b',
-    fontSize:'10px',
-   
+const notDoctor = async (e) => {
+
+  const response = await fetch('http://localhost:5000/notsignup', {
+    method: 'POST',
+    body: JSON.stringify(form),
+    headers: {
+      'Content-Type': 'application/json'
     }
+
+  });
+  const data = await response.text();
+  console.log(data);
+  alert("Request send successful")
+}
+
   return (
     <div className="main-container">
       <div className="second-container">
@@ -71,14 +76,16 @@ export const MainPage = () => {
         <div id="third-container-body">
           <div id="imgOnLeft">
             <img src="https://accounts.practo.com/static/images/illustration.png" />
-          </div>
+          </div>  
           <div id="formOnRight">
             <div className="Heading">
-              <h4>Join Practo</h4>
-              <p>
-                Are you a doctor{" "}
-                <StyledLink to="/notsignup" style ={linkstyle}>Register here</StyledLink>
-              </p>
+              <h4>Join 125,000+ doctors  </h4>
+                         
+              <Link to="/signup"  style={linkstyle} >Not a doctor?</Link>
+             
+          
+          
+              
             </div>
             <hr className="Line" />
             <div id="inp">
@@ -113,7 +120,7 @@ export const MainPage = () => {
             <div id="inp">Create Password</div>
             <input
               type="password"
-              name="password"
+              name='password'
               placeholder="Create password"
               onChange={handleForm}
             />
@@ -128,7 +135,7 @@ export const MainPage = () => {
             <p className="smallp">
               By signing up, I agree to <a className="smalla">terms</a>
             </p>
-            <div className="button" onClick={registerUser}>
+            <div className="button" onClick={notDoctor}>
               Register
             </div>
           </div>
