@@ -33,40 +33,34 @@ text-decoration: none;
 }
 `; 
 
-
-export const Login = () =>{
-
-    let [email,setEmail]=useState("");
-    let [mob,setMob]=useState(0);
-    let [pass,setPass]=useState("");
-
-    const LoginUser = ()=>{
-        
-        axios.post("https://backendusers.herokuapp.com/login",{
-            email,
-            password:pass,
-         }).then(({data})=>{  
-            alert(data.message);
-            if(data.status==="success"){
-                window.location.replace("http://localhost:3000");
-             }            
-          })
-    } 
-
-    const LoginUserMob = ()=>{
-        
-        axios.post("https://backendusers.herokuapp.com/loginmobile",{
-            password:pass,
-            mobile:mob,
-         }).then(({data})=>{  
-            alert(data.message);
-            if(data.status==="success"){
-               window.location.replace("http://localhost:3000"); 
-             }            
-          })
-           
-     //     console.log("Mobile number Active"+email);
+export const LoginPage = () => {
+    const [loginForm, setLoginForm] = useState({});
+  
+    const handleLoginForm = (e) => {
+      const { name, value } = e.target;
+      setLoginForm({
+        ...loginForm,
+        [name]: value,
+      });
+    };
+  
+        const loginUser = async (e) => {
+        e.preventDefault();
+        const response = await fetch('http://localhost:5000/login', {
+            method: 'POST',
+            body: JSON.stringify(loginForm),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        });
+  
+      const data = await response.text();
+      console.log(data);
+      alert("Login Succesfull")
+      
     }
+  
+  
 
     return <div className="main-contain">
      <div className="second-contain">
@@ -80,36 +74,44 @@ export const Login = () =>{
              <div id="imgOnLeft"><img src="https://accounts.practo.com/static/images/illustration.png" width="400px"/></div>
              <div id="formOnRightLogin">
                  
-            <div id="inp">Mobile Number/Email ID <span style={{fontSize:"10px",color:"red"}}>*</span></div>
-            <input placeholder="Mobile Number/Email ID" onChange={(e)=>{ 
-               // console.log(typeof(e.target.value));
-                if(e.target.value.length<=10){  
-                setMob(e.target.value);
-                }
-                else{
-                    setEmail(e.target.value);
-                }
-                }}/>
-            <div id="inp">Password <span style={{fontSize:"10px",color:"red"}}>*</span></div>
-            <input type="password" placeholder="Password" onChange={(e)=>{setPass(e.target.value)}}/>
+             <div className="Heading">
+              <h4>Mobile Number / Email ID</h4>
+            </div>
+            <hr className="Line" />
+            <div id="inp">
+              Email 
+              {/* <span style={{ fontSize: "10px", color: "red" }}>*</span> */}
+            </div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter Email"
+              onChange={handleLoginForm}
+            />
+            <div id="inp">
+              Password{" "}
+              {/* <span style={{ fontSize: "10px", color: "red" }}>*</span> */}
+            </div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              onChange={handleLoginForm}
+            />
+         
             <br/>
             <br/>
             <div className="checkLogin">
                 <input type="checkbox" /><label>Remember me for 30 days</label>
             </div>
+            
             <div className="checkLogin">
                 <input type="checkbox" /><label>Login with OTP instead of password</label>
-            </div>            
-            <div className="button" onClick={()=>{
-               // console.log(email);
-               // console.log(mob);
-                if(email!==""){
-                     LoginUser();
-                }
-                else if(mob!==0){
-                     LoginUserMob();
-                }
-            }}>Login</div>
+            </div>
+            <br/>            
+            <div className="button" onClick={loginUser}>
+             Login
+            </div>
 
              </div>
          </div>

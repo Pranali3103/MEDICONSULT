@@ -31,12 +31,13 @@ export const MainPage = () => {
   const [form, setForm] = useState({});
 
   const handleForm = (e) => {
+    const { name, value } = e.target;
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
-
+  
   const registerUser = async (e) => {
     const response = await fetch('http://localhost:5000/signup', {
       method: 'POST',
@@ -61,7 +62,7 @@ export const MainPage = () => {
       <div className="second-container">
         <div className="third-container-top">
           <span>
-            <StyledLink to="/login">Login</StyledLink>{" "}
+            <StyledLink to="/login">Login</StyledLink>{""}
           </span>
           <span>
             <StyledLinkRegister to="/signup">Register</StyledLinkRegister>
@@ -87,7 +88,7 @@ export const MainPage = () => {
             </div>
             <input
               type="text"
-              name="fullName"
+              name="fullname"
               placeholder="Full Name"
               onChange={handleForm}
             />
@@ -100,6 +101,8 @@ export const MainPage = () => {
               placeholder="Enter Email"
               onChange={handleForm}
             />
+
+
             <div id="inp">
               Mobile Number{" "}
               <span style={{ fontSize: "10px", color: "red" }}>*</span>

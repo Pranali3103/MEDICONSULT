@@ -6,6 +6,7 @@ const RegisterSchema = new Schema({
     fullname: {
         type: String,
         require: true,
+        
     },
    
     email: {

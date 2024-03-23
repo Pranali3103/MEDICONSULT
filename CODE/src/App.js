@@ -7,7 +7,7 @@ import SearchbarWrapper from './components/SearchBar/SearchbarWrapper';
 import SearchWrapper from './components/SearchResults/SearchWrapper';
 import Searchbar from './components/SearchBar/Searchbar';
 import ConsultPage from './components/ConsultPage/ConsultPage';
-import {Login} from "./components/Login/Login"
+import {LoginPage} from "./components/Login/Login"
 import { MainPage } from './components/MainPage/MainPage';
 import {Medicine} from "./components/medicine/medicine"
 import {MedecineCategories} from "./components/medicine/medicineCategories"
@@ -24,7 +24,7 @@ function App() {
 				<Route path = "/doctors" element = {<FindDoctors/>}></Route>
 				<Route path="/search" element={<><SearchbarWrapper><Searchbar /></SearchbarWrapper><SearchWrapper /></>}/>
 				<Route path = "/consultpage" element = {<ConsultPage/>}></Route>
-				<Route path="/login" element={<Login/>}></Route>
+				<Route path="/login" element={<LoginPage/>}></Route>
        			 <Route path="/signup" element={<MainPage/>}></Route>
 					<Route path="/notsignup" element={<NotDoctor/>}></Route>
 					<Route path={"/medicines"} element={<Medicine/>}></Route>
